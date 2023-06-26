@@ -22,9 +22,3 @@ app.listen(PORT, () => {
 });
 
 
-/*
-- "controller" folder (include: thoughtController, userController )
-- "models" folder (include: index.js, thought.js and user.js)
-- "routes" folder (include: index.js, "api" folder (include: userRoutes, thoughtRoutes, index.js))
-- server.js
-- .gitignore */
