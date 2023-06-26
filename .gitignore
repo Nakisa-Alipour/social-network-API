@@ -1,0 +1,8 @@
+# Directories
+node_modules/    # Ignore the "node_modules" directory
+dist/            # Ignore the "dist" directory (if applicable)
+.env             # Ignore environment variable files
+
+# Files
+.env.local       # Ignore local environment variable files
+.DS_Store        # Ignore macOS specific file
