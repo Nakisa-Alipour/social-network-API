@@ -1,17 +1,26 @@
+
+
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
+const moment = require('moment');
 
-// Define the reaction subdocument schema
+
+/*
+const { Schema, Types } = require('mongoose');
+const moment = require('moment')
+*/
+
+//Define the reaction subdocument schema
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: mongoose.Schema.Types.ObjectId,
+            //type: Schema.Types.ObjectId,
             default: () => new mongoose.Types.ObjectId() // Generate a new ObjectId as the default value
+            //default: ()=> new Types.ObjectId()
         },
         reactionBody: {
             type: String,
-            required: true,
             maxlength: 280 // Set maximum character length for reaction body
         },
         username: {
@@ -21,14 +30,15 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: timestamp => dateFormat(timestamp) // Use a getter method to format the timestamp on query
+            //get: timestamp => dateFormat(timestamp) // Use a getter method to format the timestamp on query
+            get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
         }
     },
   {
     toJSON: {
         getters: true // Include getters when converting to JSON
     },
-    id: false // Disable the "_id" field in the subdocument
+    //id: false // Disable the "_id" field in the subdocument
   }
 );
 
@@ -44,7 +54,8 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: timestamp => dateFormat(timestamp) // Use a getter method to format the timestamp on query
+            //get: timestamp => dateFormat(timestamp) // Use a getter method to format the timestamp on query
+            get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
         },
         username: {
             type: String,

@@ -2,28 +2,44 @@ const { Thought, User } = require('../models');
 
 const thoughtController = {
   // Create a new thought
-  createThought({ body }, res) {
+  /*
+  createThought(body, res) {
     Thought.create(body)
-      .then((dbThoughtData) => {
-        // Add the created thought's ID to the associated user's thoughts array
+      .then(({ _id }) => {
         return User.findOneAndUpdate(
-          { _id: body.userId },
-          { $push: { thoughts: dbThoughtData._id } },
+          { username: body.username },
+          { $addToSet: { thoughts: _id } },
           { new: true }
         );
       })
-      .then((dbUserData) => {
-        // If no user found, send 404 status and error message
+      .then(dbUserData => {
         if (!dbUserData) {
-          res.status(404).json({ message: 'No user found with this id!' });
+          res.status(400).json({ message: 'No user found with this name' });
           return;
         }
         res.json(dbUserData);
       })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+      .catch(err => res.json(err));
+  },
+  */
+
+  createThought ({params, body}, res) {
+    Thought.create(body)
+    .then(({_id}) => {
+      return User.findOneAndUpdate(
+        { _id: params.userId}, 
+        {$push: {thoughts: _id}}, 
+        {new: true}
+      );
+    })
+    .then(dbThoughtsData => {
+        if(!dbThoughtsData) {
+            res.status(404).json({message: 'No thoughts with this particular ID!'});
+            return;
+        }
+        res.json(dbThoughtsData)
+    })
+    .catch(err => res.json(err)); 
   },
 
   // Get all thoughts
