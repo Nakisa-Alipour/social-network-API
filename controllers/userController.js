@@ -3,6 +3,7 @@ const { User } = require('../models');
 const userController = {
 
     // Create a new user
+    /*
     createUser({ body }, res) {User.create(body)
         .then((dbUserData) => res.json(dbUserData))
         .catch((err) => {
@@ -10,6 +11,25 @@ const userController = {
             res.status(500).json(err);
         });
     },
+    */
+
+    // Create a new user
+    createUser({ body }, res) {User.create(body)
+        .then((dbUserData) => {
+        // logic to handle the case when a new user is created without any associated thoughts
+            return User.findOneAndUpdate(
+                { _id: dbUserData._id },
+                { $addToSet: { thoughts: { $each: dbUserData.thoughts } } },
+                { new: true }
+            );
+        })
+        .then((dbUserData) => res.json(dbUserData))
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
+  
     
     // Get all users
     getAllUsers(req, res) {User.find({})

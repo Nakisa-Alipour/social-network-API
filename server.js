@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const routes = require('./routes');
 
 const app = express();
@@ -20,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+installation:
 npm install
 npm install express@4.17.1
 npm install mongoose
