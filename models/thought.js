@@ -1,14 +1,7 @@
-
-
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const moment = require('moment');
 
-
-/*
-const { Schema, Types } = require('mongoose');
-const moment = require('moment')
-*/
 
 //Define the reaction subdocument schema
 const reactionSchema = new Schema(
@@ -38,7 +31,6 @@ const reactionSchema = new Schema(
     toJSON: {
         getters: true // Include getters when converting to JSON
     },
-    //id: false // Disable the "_id" field in the subdocument
   }
 );
 
@@ -82,5 +74,4 @@ thoughtSchema.virtual('reactionCount')
 const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = Thought;
-
 

@@ -16,19 +16,3 @@ db.once("open", () => {
   });
 });
 
-
-
-/*
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-api', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-installation:
-npm install
-npm install express@4.17.1
-npm install mongoose
-node server.js
-*/
-
-
