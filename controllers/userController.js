@@ -1,6 +1,16 @@
 const { User } = require('../models');
 
 const userController = {
+
+    // Create a new user
+    createUser({ body }, res) {User.create(body)
+        .then((dbUserData) => res.json(dbUserData))
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
+    
     // Get all users
     getAllUsers(req, res) {User.find({})
     .populate({
@@ -46,14 +56,7 @@ const userController = {
         });
     },
 
-    // Create a new user
-    createUser({ body }, res) {User.create(body)
-        .then((dbUserData) => res.json(dbUserData))
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-    },
+    
 
     // Update a user by ID
     updateUser({ params, body }, res) {User.findOneAndUpdate(
