@@ -4,8 +4,12 @@ dist/            # Ignore the "dist" directory (if applicable)
 .env             # Ignore environment variable files
 temp/*
 .idea
-.env
 
 # Files
 .env.local       # Ignore local environment variable files
 .DS_Store        # Ignore macOS specific file
+
+node_modules
+.env
+.DS_Store
+package-lock.json
