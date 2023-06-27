@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 const userController = {
 
@@ -14,7 +14,9 @@ const userController = {
     */
 
     // Create a new user
-    createUser({ body }, res) {User.create(body)
+    createUser( body, res) {
+        console.log('here', body);
+        User.create(body)
         .then((dbUserData) => {
         // logic to handle the case when a new user is created without any associated thoughts
             return User.findOneAndUpdate(
